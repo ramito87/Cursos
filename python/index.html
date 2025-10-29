@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comandos básicos de Python</title>
+  <style>
+    /* Estilos se mantienen igual */
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Python: Guía Visual Completa</h1>
+    <p class="lead">Tarjetas explicativas para dominar Python desde sus fundamentos hasta técnicas modernas. Ideal
+      para consulta rápida y ritual técnico.</p>
+
+    <div class="grid">
+      <!-- Historia -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Historia de Python</h3>
+        </div>
+        <p class="desc">Creado en 1991 por Guido van Rossum. Evolucionó con múltiples versiones y se convirtió en un
+          estándar en la programación.</p>
+        <pre><code># Nombres iniciales
+Python 2 → Python 3
+
+# Estándares clave
+Python 2 (2000), Python 3 (2008)
+</code></pre>
+        <div class="meta">Fuente: [Python.org](https://www.python.org/doc/essays/foreword/)</div>
+      </section>
+
+      <!-- Variables y tipos de datos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Variables y tipos de datos</h3>
+        </div>
+        <p class="desc">Se declaran sin tipo explícito. Tipos básicos incluyen int, float, str, list, dict.</p>
+        <pre><code>x = 5          # int
+y = 10.5       # float
+nombre = "Ramses"  # str
+frutas = ["manzana", "banana"]  # list
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_variables_types.asp)</div>
+      </section>
+
+      <!-- Funciones -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Funciones</h3>
+        </div>
+        <p class="desc">Bloques reutilizables de código.</p>
+        <pre><code>def saludar(nombre):
+    return "Hola " + nombre
+
+print(saludar("Ramses"))  # "Hola Ramses"
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_functions.asp)</div>
+      </section>
+
+      <!-- Estructuras de control -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Estructuras de control</h3>
+        </div>
+        <p class="desc">Controlan el flujo del programa: condicionales y bucles.</p>
+        <pre><code>if edad >= 18:
+    print("Mayor de edad")
+else:
+    print("Menor")
+
+for i in range(5):
+    print(i)
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_conditions.asp)</div>
+      </section>
+
+      <!-- Manejo de errores -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Manejo de errores</h3>
+        </div>
+        <p class="desc">Evita que el programa se detenga ante fallos.</p>
+        <pre><code>try:
+    ejecutar()
+except Exception as error:
+    print("Error:", error)
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_try_except.asp)</div>
+      </section>
+
+      <!-- Módulos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Módulos e importaciones</h3>
+        </div>
+        <p class="desc">Permiten dividir el código en archivos reutilizables.</p>
+        <pre><code># archivo saludo.py
+def saludar():
+    return "Hola"
+
+# archivo principal.py
+from saludo import saludar
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_modules.asp)</div>
+      </section>
+
+      <!-- JSON -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>JSON</h3>
+        </div>
+        <p class="desc">Formato ligero para intercambio de datos entre sistemas.</p>
+        <pre><code>import json
+
+usuario = {
+    "nombre": "Ramses",
+    "edad": 35
+}
+
+json_str = json.dumps(usuario)  # a texto
+obj = json.loads(json_str)       # a objeto
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/python/python_json.asp)</div>
+      </section>
+
+    </div>
+
+    <footer>
+      Esta página forma parte de tu biblioteca técnica personal. Consulta, copia y ritualiza tu dominio de Python.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copiado</div>
+
+  <script>
+    // Copiar texto del siguiente <pre><code> hermano del botón
+    function copyCode(btn) {
+      // buscar el pre/code más cercano dentro de la tarjeta
+      var card = btn.closest('.card');
+      if (!card) return;
+      var codeEl = card.querySelector('pre code');
+      if (!codeEl) return;
+      var text = codeEl.innerText;
+      copyText(text);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showToast).catch(function () {
+          fallbackCopy(text);
+        });
+      } else fallbackCopy(text);
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(); }
+      catch (e) { alert('No se pudo copiar automáticamente. Selecciona y copia manualmente.'); }
+      document.body.removeChild(ta);
+    }
+
+    function showToast() {
+      var t = document.getElementById('toast');
+      t.classList.add('show');
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(function () { t.classList.remove('show'); }, 1500);
+    }
+
+    // botón "Ir arriba"
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
+</body>
+
+</html>
