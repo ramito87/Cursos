@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Git KB - Base de Conocimiento</title>
+  <style>
+    :root {
+      --bg: #000;
+      --panel: #0b0b0b;
+      --accent: #ff2b2b;
+      --muted: #bdbdbd;
+      --glass: rgba(255, 43, 43, 0.06);
+      --radius: 10px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: #fff;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: 36px auto;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    p.lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 43, 43, 0.08);
+      transform: translateY(0);
+      transition: transform .22s ease, box-shadow .22s ease;
+      animation: fadeIn .6s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(255, 43, 43, 0.06);
+    }
+
+    .cmd-title h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--accent);
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 10px;
+    }
+
+    pre {
+      background: rgba(255, 43, 43, 0.03);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #fff;
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Git: Base de Conocimiento</h1>
+    <p class="lead">Guía visual y práctica para dominar Git. Comandos, conceptos y ejemplos listos para copiar.</p>
+    <div class="grid">
+      <!-- ¿Qué es Git? -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>¿Qué es Git y para qué sirve?</h3>
+        </div>
+        <p class="desc">Sistema de control de versiones distribuido. Permite gestionar cambios en archivos y colaborar.
+        </p>
+        <pre><code># Git rastrea cambios en archivos
+# Ideal para proyectos de desarrollo, documentación y colaboración
+</code></pre>
+      </section>
+
+      <!-- Instalación -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Instalación en Linux y Windows</h3>
+        </div>
+        <p class="desc">Instala Git según tu sistema operativo.</p>
+        <pre><code># Debian/Ubuntu
+sudo apt install git
+
+# Windows
+Descargar desde https://git-scm.com
+</code></pre>
+      </section>
+
+      <!-- Configuración -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Configurar usuario</h3>
+        </div>
+        <p class="desc">Establece tu identidad para los commits.</p>
+        <pre><code>git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
+git config --list
+</code></pre>
+      </section>
+
+      <!-- Crear y clonar -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Crear y clonar repositorio</h3>
+        </div>
+        <p class="desc">Inicia un proyecto o clona uno existente.</p>
+        <pre><code># Crear repositorio
+git init
+
+# Clonar repositorio
+git clone git@github.com:usuario/repositorio.git
+</code></pre>
+      </section>
+
+      <!-- Espacio de trabajo -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Espacio de trabajo</h3>
+        </div>
+        <p class="desc">Verifica estado y diferencias.</p>
+        <pre><code>git status
+git add archivo.txt
+git diff
+</code></pre>
+      </section>
+
+      <!-- Gitignore -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>.gitignore</h3>
+        </div>
+        <p class="desc">Ignora archivos que no deben rastrearse.</p>
+        <pre><code># Ejemplo de .gitignore
+*.log
+node_modules/
+.env
+</code></pre>
+      </section>
+
+      <!-- Commit y versiones -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Commits y versiones</h3>
+        </div>
+        <p class="desc">Guarda cambios y revisa historial.</p>
+        <pre><code>git commit -m "mensaje"
+git log
+</code></pre>
+      </section>
+
+      <!-- Reset y checkout -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Reset y checkout</h3>
+        </div>
+        <p class="desc">Revertir o cambiar de rama.</p>
+        <pre><code>git reset --soft HEAD^
+git checkout rama
+</code></pre>
+      </section>
+
+      <!-- Deshacer y volver -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Deshacer y volver a commits</h3>
+        </div>
+        <p class="desc">Revertir cambios o volver a estados anteriores.</p>
+        <pre><code>git revert <hash>
+git checkout <hash>
+</code></pre>
+      </section>
+
+      <!-- Buscar commits -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Buscar commits</h3>
+        </div>
+        <p class="desc">Filtra por mensaje o autor.</p>
+        <pre><code>git log --grep="mensaje"
+</code></pre>
+      </section>
+
+      <!-- Ramas -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Ramas</h3>
+        </div>
+        <p class="desc">Trabaja en paralelo sin afectar la rama principal.</p>
+        <pre><code>git branch
+git checkout -b nueva-rama
+git merge rama
+</code></pre>
+      </section>
+
+      <!-- Stash -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Stash</h3>
+        </div>
+        <p class="desc">Guarda cambios temporales.</p>
+        <pre><code>git stash
+git stash list
+git stash clear
+</code></pre>
+      </section>
+
+      <!-- Cherry-pick -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Cherry-pick</h3>
+        </div>
+        <p class="desc">Aplica un commit específico a otra rama.</p>
+        <pre><code>git cherry-pick <hash>
+</code></pre>
+      </section>
+
+      <!-- Conflictos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Resolver conflictos</h3>
+        </div>
+        <p class="desc">Detecta y resuelve conflictos de fusión.</p>
+        <pre><code># Edita archivos marcados
+# Luego:
+git add archivo
+git commit
+</code></pre>
+      </section>
+
+      <!-- Repositorios remotos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Repositorios remotos y GitHub</h3>
+        </div>
+        <p class="desc">Sincroniza con servidores externos.</p>
+        <pre><code>git remote -v
+git push origin master
+git pull origin master
+</code></pre>
+      </section>
+    </div>
+
+
+  </div>
+  <footer style="margin-top:20px; color:#999; font-size:13px">
+    Esta página forma parte de tu biblioteca técnica personal. Consulta, copia y ritualiza tu dominio de Git.
+  </footer>
+  </div>
+</body>
+
+</html>

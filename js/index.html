@@ -1,23 +1,537 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curso de JavaScript</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comandos básicos de Linux</title>
+  <style>
+    :root {
+      --bg: #000;
+      --panel: #0b0b0b;
+      --accent: #ff2b2b;
+      --muted: #bdbdbd;
+      --glass: rgba(255, 43, 43, 0.06);
+      --radius: 10px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: #fff;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: 36px auto;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      letter-spacing: 0.5px
+    }
+
+    p.lead {
+      margin: 0 0 18px;
+      color: var(--muted)
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 43, 43, 0.08);
+      transform: translateY(0);
+      transition: transform .22s ease, box-shadow .22s ease;
+      animation: fadeIn .6s ease
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(255, 43, 43, 0.06)
+    }
+
+    .cmd-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px
+    }
+
+    .cmd-title h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--accent)
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 10px
+    }
+
+    pre {
+      background: rgba(255, 43, 43, 0.03);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #fff;
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    code {
+      white-space: pre-wrap
+    }
+
+    .meta {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 10px
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: transform .15s ease, opacity .15s
+    }
+
+    .btn:active {
+      transform: scale(.98)
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted)
+    }
+
+    .small {
+      font-size: 12px;
+      padding: 6px 8px;
+      border-radius: 6px
+    }
+
+    .note {
+      background: linear-gradient(90deg, rgba(255, 43, 43, 0.04), transparent);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    footer {
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* copy toast */
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .22s, transform .22s
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* responsive */
+    @media (max-width:420px) {
+      .wrap {
+        padding: 16px
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <h1>Curso de JavaScript</h1>
-    <p>Aprende los fundamentos de JavaScript</p>
-  </header>
-  <main>
-    <!-- Contenido principal irá aquí -->
-  </main>
-  <footer>
-    <!-- Pie de página irá aquí -->
-  </footer>
+  <div class="wrap">
+    <h1>JavaScript: Guía Visual Completa</h1>
+    <p class="lead">Tarjetas explicativas para dominar JavaScript desde sus fundamentos hasta técnicas modernas. Ideal
+      para consulta rápida y ritual técnico.</p>
+
+    <div class="grid">
+      <!-- Historia -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Historia de JavaScript</h3>
+        </div>
+        <p class="desc">Creado en 1995 por Brendan Eich en Netscape. Evolucionó con ECMAScript y se convirtió en el
+          estándar web.</p>
+        <pre><code>// Nombres iniciales
+Mocha → LiveScript → JavaScript
+
+// Estándares clave
+ES1 (1997), ES5 (2009), ES6 (2015)
+</code></pre>
+        <div class="meta">Fuente: [GeeksforGeeks](https://www.geeksforgeeks.org/javascript/history-of-javascript/),
+          [W3Schools](https://www.w3schools.com/js/js_history.asp),
+          [Dev.to](https://dev.to/saartwito/the-evolution-of-javascript-from-inception-to-modern-day-282k)</div>
+      </section>
+
+      <!-- Variables y alcance -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Variables y alcance</h3>
+        </div>
+        <p class="desc">Se declaran con <code>var</code>, <code>let</code> y <code>const</code>. Cada una tiene reglas
+          de alcance distintas.</p>
+        <pre><code>var x = 5; // global o función
+let y = 10; // bloque
+const z = 15; // constante
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/js/js_scope.asp),
+          [FreeCodeCamp](https://www.freecodecamp.org/news/scope-in-javascript-global-vs-local-vs-block-scope/)</div>
+      </section>
+
+      <!-- Tipos de datos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Tipos de datos</h3>
+        </div>
+        <p class="desc">JavaScript tiene 8 tipos básicos: string, number, boolean, null, undefined, symbol, bigint,
+          object.</p>
+        <pre><code>let nombre = "Ramses"; // string
+let edad = 35;         // number
+let activo = true;     // boolean
+let datos = { nombre, edad }; // object
+</code></pre>
+        <div class="meta">Fuente: [Programiz](https://www.programiz.com/javascript/data-types),
+          [W3Schools](https://www.w3schools.com/js/js_datatypes.asp)</div>
+      </section>
+
+      <!-- DOM -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Manipulación del DOM</h3>
+        </div>
+        <p class="desc">El DOM permite modificar HTML desde JavaScript.</p>
+        <pre><code>const titulo = document.querySelector("h1");
+titulo.textContent = "Nuevo título";
+</code></pre>
+        <div class="meta">Fuente: [JavaScriptTutorial.net](https://www.javascripttutorial.net/javascript-dom/),
+          [FreeCodeCamp](https://www.freecodecamp.org/espanol/news/el-dom-de-javascript-un-tutorial-practico/)</div>
+      </section>
+
+      <!-- Funciones y flechas -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Funciones y arrow functions</h3>
+        </div>
+        <p class="desc">Las funciones son bloques reutilizables. Las flechas simplifican la sintaxis.</p>
+        <pre><code>// Tradicional
+function saludar(nombre) {
+  return "Hola " + nombre;
+}
+
+// Flecha
+const saludar = nombre => "Hola " + nombre;
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/Js/js_arrow_function.asp),
+          [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)</div>
+      </section>
+
+      <!-- Estructuras de control -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Estructuras de control</h3>
+        </div>
+        <p class="desc">Controlan el flujo del programa: condicionales y bucles.</p>
+        <pre><code>if (edad >= 18) {
+  console.log("Mayor de edad");
+} else {
+  console.log("Menor");
+}
+
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+</code></pre>
+        <div class="meta">Fuente:
+          [GeeksforGeeks](https://www.geeksforgeeks.org/javascript/control-statements-in-javascript/),
+          [Platzi](https://platzi.com/blog/guia-completa-de-estructuras-de-control-en-javascript-if-else-if-else-y-switch/)
+        </div>
+      </section>
+
+      <!-- Eventos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Eventos y listeners</h3>
+        </div>
+        <p class="desc">Permiten reaccionar a acciones del usuario.</p>
+        <pre><code>document.getElementById("btn")
+  .addEventListener("click", () => {
+    alert("¡Click!");
+  });
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/js/js_htmldom_eventlistener.asp),
+          [MDN](https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener)</div>
+      </section>
+
+      <!-- Promesas y async/await -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Promesas y async/await</h3>
+        </div>
+        <p class="desc">Manejo moderno de operaciones asíncronas.</p>
+        <pre><code>// Promesa
+fetch("api/datos")
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+// Async/await
+async function cargar() {
+  const res = await fetch("api/datos");
+  const data = await res.json();
+  console.log(data);
+}
+</code></pre>
+        <div class="meta">Fuente: [JavaScript.info](https://javascript.info/async-await),
+          [GeeksforGeeks](https://www.geeksforgeeks.org/javascript/callbacks-vs-promises-vs-async-await/)</div>
+      </section>
+
+      <!-- Manejo de errores -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Manejo de errores</h3>
+        </div>
+        <p class="desc">Evita que el programa se detenga ante fallos.</p>
+        <pre><code>try {
+  ejecutar();
+} catch (error) {
+  console.error("Error:", error.message);
+}
+</code></pre>
+        <div class="meta">Fuente:
+          [MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/try...catch),
+          [JavaScript.info](https://es.javascript.info/try-catch)</div>
+      </section>
+
+      <!-- Módulos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Módulos e importaciones</h3>
+        </div>
+        <p class="desc">Permiten dividir el código en archivos reutilizables.</p>
+        <pre><code>// archivo saludo.js
+export function saludar() {
+  return "Hola";
+}
+
+// archivo principal.js
+import { saludar } from "./saludo.js";
+</code></pre>
+        <div class="meta">Fuente: [W3Schools](https://www.w3schools.com/js/js_modules.asp),
+          [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)</div>
+      </section>
+      <!-- Arrays -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Arrays</h3>
+        </div>
+        <p class="desc">Colecciones ordenadas de elementos. Se accede por índice.</p>
+        <pre><code>let frutas = ["manzana", "banana", "uva"];
+console.log(frutas[0]); // "manzana"
+
+// Métodos comunes
+frutas.push("naranja");     // agregar
+frutas.pop();               // eliminar último
+frutas.includes("banana");  // true
+</code></pre>
+        <div class="meta">Los arrays pueden contener cualquier tipo de dato, incluso otros arrays u objetos.</div>
+      </section>
+
+      <!-- Objetos -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Objetos</h3>
+        </div>
+        <p class="desc">Estructuras clave-valor que representan entidades.</p>
+        <pre><code>let persona = {
+  nombre: "Ramses",
+  edad: 35,
+  saludar: function() {
+    return "Hola " + this.nombre;
+  }
+};
+
+console.log(persona.saludar()); // "Hola Ramses"
+</code></pre>
+        <div class="meta">Los objetos son la base de la programación orientada a objetos en JS.</div>
+      </section>
+
+      <!-- Clases -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Clases</h3>
+        </div>
+        <p class="desc">Plantillas para crear objetos con propiedades y métodos.</p>
+        <pre><code>class Animal {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+  hablar() {
+    console.log(this.nombre + " hace ruido.");
+  }
+}
+
+const perro = new Animal("Firulais");
+perro.hablar(); // "Firulais hace ruido."
+</code></pre>
+        <div class="meta">Las clases fueron introducidas en ES6 como azúcar sintáctico sobre prototipos.</div>
+      </section>
+
+      <!-- JSON -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>JSON</h3>
+        </div>
+        <p class="desc">Formato ligero para intercambio de datos entre sistemas.</p>
+        <pre><code>let usuario = {
+  nombre: "Ramses",
+  edad: 35
+};
+
+let json = JSON.stringify(usuario); // a texto
+let obj = JSON.parse(json);         // a objeto
+</code></pre>
+        <div class="meta">JSON es usado en APIs, almacenamiento y configuración.</div>
+      </section>
+
+      <!-- localStorage -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>localStorage</h3>
+        </div>
+        <p class="desc">Almacena datos en el navegador de forma persistente.</p>
+        <pre><code>// Guardar
+localStorage.setItem("nombre", "Ramses");
+
+// Leer
+let nombre = localStorage.getItem("nombre");
+
+// Eliminar
+localStorage.removeItem("nombre");
+</code></pre>
+        <div class="meta">Ideal para guardar preferencias, sesiones o progreso local.</div>
+      </section>
+
+      <!-- APIs -->
+      <section class="card">
+        <div class="cmd-title">
+          <h3>Consumo de APIs</h3>
+        </div>
+        <p class="desc">JavaScript puede conectarse a servicios externos usando fetch.</p>
+        <pre><code>fetch("https://api.example.com/datos")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error("Error:", err));
+</code></pre>
+        <div class="meta">Usa headers y métodos HTTP para POST, PUT, DELETE según la API.</div>
+      </section>
+
+    </div>
+
+    <footer>
+      Esta página forma parte de tu biblioteca técnica personal. Consulta, copia y ritualiza tu dominio de JavaScript.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copiado</div>
+
+  <script>
+    // Copiar texto del siguiente <pre><code> hermano del botón
+    function copyCode(btn) {
+      // buscar el pre/code más cercano dentro de la tarjeta
+      var card = btn.closest('.card');
+      if (!card) return;
+      var codeEl = card.querySelector('pre code');
+      if (!codeEl) return;
+      var text = codeEl.innerText;
+      copyText(text);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showToast).catch(function () {
+          fallbackCopy(text);
+        });
+      } else fallbackCopy(text);
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(); }
+      catch (e) { alert('No se pudo copiar automáticamente. Selecciona y copia manualmente.'); }
+      document.body.removeChild(ta);
+    }
+
+    function showToast() {
+      var t = document.getElementById('toast');
+      t.classList.add('show');
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(function () { t.classList.remove('show'); }, 1500);
+    }
+
+    // botón "Ir arriba"
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
 </body>
 
 </html>
